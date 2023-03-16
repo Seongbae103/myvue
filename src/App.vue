@@ -5,14 +5,34 @@
       <div>
         <a href="#" class="nav-item">서비스 소개</a>
         <a href="#" class="nav-item">이용방법</a>
-        <span class="nav-item">|</span>
-        <a href="#" class="nav-item">Sign up</a>
-        <a href="#" class="nav-item">Log in</a>
       </div>
     </nav>
   </head>
   <body>
-      <a href="#" class="chatbot"><img src="./assets/chatbot.png" class="chatbot"></a>
+    <a href="#" class="chatbot" v-if="chatbotButton == false"><img src="./assets/chatbot.png" @click="chatBg"  class="chatbot"></a>
+    <div v-if="chatbotButton == true">
+      <div class="chatBgWhite">
+        <div class="chat-item" style="height:15%;">
+          <td><h5 class="modal-title" >챗봇</h5></td>
+          <td>
+            <button type="button" @click="chatBg" style="display: flex; align-items:flex-end;">
+              <span>x</span>
+            </button>
+          </td>
+        </div>
+        <div class="chat-body">
+          챗봇화면 
+        </div>
+        <tr class="chat-input" style="border: 100px green solid;">
+          <td>
+            <input type="text" style="width: 90%;">
+          </td>
+          <td>
+            <button style="width: 50px;">전송</button>
+          </td>
+        </tr>
+      </div>
+    </div>
     
     <main name="landing1">
       <div class="main-container">
@@ -22,7 +42,7 @@
           </div>
         </div>
         <div class="sub-head">
-          "우산 좀 빌리자"
+          "인공지능을 활용한 효율적인 자원 관리를 위한 공유경제 서비스 자동화"
         </div>
         <div class="button-area">
           <button class="button-style"></button>
@@ -31,11 +51,23 @@
     </main>
     <main2 name="landing2">
       <div class="main-container" style="float: left; width: 50%; heignt:10%;">
-        <div class="head2">
-          무겁게 챙겨다니지 말고
-          <div class="head-l">편의점에서 비싸게 사지 말고</div>
+        <div class="head2" >
+          <div style="text-align:left;">바로우산?</div> 
+          <tr>
+            <td>
+              <div class="sub-head2">ChatGPT</div>
+              <div class="sub-head2">객체 인식</div>
+              <div class="sub-head2">수요 예측 인공지능</div>
+            </td>
+            <td>
+              <div class="head-l">을 이용한 공유경제 자동화 서비스</div>
+            </td>
+          </tr>
+          
+      
+          
+
         </div>
-        <div class="sub-head2">바로우산(진짜 못꾸미네ㅋㅋㅋㅋ)</div>
       </div>
       <div style="float: left; width: 50%; heignt:10%;">
         <img src="./assets/umb.jpg" style="width:100%; heigh:100%;">
@@ -121,8 +153,6 @@
   </footer>
 
 
-
-
 </template>
 
 <script>
@@ -131,6 +161,20 @@ export default {
   name: 'App',
   data (){
     return {
+      chatbotButton : true,
+      ai : ['ChatGPT', '객체 인식', '수요 예측']
+    }
+  },
+  methods : {
+    chatBg(){
+      if (this.chatbotButton == false){
+        this.chatbotButton = true;
+      }else{
+        this.chatbotButton = false;
+      }
+    },
+    cp(){
+      
     }
   },
   components: {
@@ -147,7 +191,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;  
-  min-width: 780px;
+  min-width: 380px;
   width: 100%;
   height: 500px;
 }
@@ -201,8 +245,9 @@ body {
   color: #2c3e50;
 }
 
-.header {
+head {
   position: fixed;
+  width: 100%;
 }
 
 body{
@@ -280,7 +325,7 @@ main{
   color: black;
   font-weight: 900;
   position: relative;
-  left: -10vw;
+  left: 1vw;
   padding-bottom: 8vh;
 }
 .head-f{
@@ -303,7 +348,7 @@ main{
 
 .sub-head2{
   color: #1ed760;
-  font-size: 3vw;
+  font-size: 2vw;
   line-height: 2vh;
   padding-bottom: 4vw;
   text-align: center; 
@@ -396,22 +441,52 @@ footer{
   font-size: 24px;
 }
 
-.chat {
-  left : 90%;
-  top: 85%; 
-  position: fixed;
-}
-
 .chatbot{
   border-radius: 50%;
   background-color: white;
+  color: black;
   position: fixed;
   right: 15px;
   bottom: 15px;
   width: 80px;
   height: 80px;
   z-index: 99;
+
 }
+
+.chat-item{
+  display: flex;
+  justify-content: space-between;
+}
+.chat-body{
+  display: flex;
+  justify-items: center;
+  right: 1px;
+  height: 65%;
+  width: 100%;
+  border: 1px solid black ;
+}
+
+.chat-input{
+  display: flexbox;
+  align-content: center;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 90%;
+}
+
+.chatBgWhite {
+  height: 30%;
+  width: 30%;
+  position: fixed; 
+  color: black;
+  background: white;
+  bottom: 0;
+  right: 0;
+  border-radius: 8px;
+  padding: 10px 5px;
+  border: 1px solid red ;
+} 
 
 .footer-middle{
   color: #919496;
@@ -430,6 +505,11 @@ footer{
 .footer-end-item{
   margin-right: 2vw;
   color: #919496;
+}
+
+.box{
+  border: 2px solid red ;
+  margin: 1%;
 }
 
 </style>
